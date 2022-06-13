@@ -44,4 +44,37 @@ const recipes = [
 
 ]
 
-module.exports = { recipes }
+const ingredients = [
+    {
+        id: '1',
+        name: 'butter',
+        description: 'This is the amount of butter to use',
+        amount: '1 tbsp'
+    },
+    {
+        id: '2',
+        name: 'Onion',
+        description: 'One chopped onion',
+        amount: 'one small'
+    },
+    {
+        id: '3',
+        name: 'garlic',
+        description: 'One clove of garlic',
+        amount: 3
+    },
+    {
+        id: '4',
+        name: 'Chopped Spinach',
+        description: 'Frozen chopped spinach',
+        amount: '1 pkg'
+    },
+    {
+        id: '5',
+        name: 'Mushrooms',
+        description: 'Fresh Mushrooms',
+        amount: 'one can'
+    },
+]
+
+module.exports = { recipes, ingredients }
