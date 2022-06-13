@@ -1,6 +1,7 @@
 // Mongoose models
 const Recipe = require("../models/Recipe");
 const Ingredient = require("../models/Ingredient");
+const Testimonial = require("../models/Testimonial")
 
 const {
   GraphQLObjectType,
@@ -8,7 +9,7 @@ const {
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
-  GraphQLInt,
+  GraphQLNonNull,
 } = require("graphql");
 
 // Recipe type
@@ -37,6 +38,16 @@ const IngredientType = new GraphQLObjectType({
     amount: { type: GraphQLString },
   }),
 });
+
+// Testimonial type
+const TestimonialType = new GraphQLObjectType({
+    name: "Testimonial",
+    fields: () => ({
+      id: { type: GraphQLID },
+      name: { type: GraphQLString },
+      comment: { type: GraphQLString }
+    }),
+  });
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -67,9 +78,63 @@ const RootQuery = new GraphQLObjectType({
         return Recipe.findById(args.id);
       },
     },
+    testimonial: {
+        type: TestimonialType,
+        args: { id: { type: GraphQLID } },
+        resolve(parent, args) {
+          return Testimonial.findById(args.id);
+        },
+      },
+  },
+});
+
+// Mutations
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addTestimonial: {
+        type: TestimonialType,
+        args: {
+            name: { type: GraphQLNonNull(GraphQLString) },
+            comment: { type: GraphQLNonNull(GraphQLString) }
+        },
+        resolve(parent, args){
+            const testimonial = new Testimonial({
+                name: args.name,
+                comment: args.comment
+            })
+            return testimonial.save()
+        }
+    },
+
+    addRecipe: {
+      type: RecipeType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args){
+        const recipe = new Recipe({
+            name: args.name,
+            description: args.description
+        })
+        return recipe.save()
+      }
+    },
+    // Delete a recipe
+    deleteRecipe: {
+        type: RecipeType,
+        args: {
+            id: { type: GraphQLNonNull(GraphQLID) },
+        },
+        resolve(parent, args){
+            return Recipe.findByIdAndRemove(args.id)
+        }
+    }
   },
 });
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });
