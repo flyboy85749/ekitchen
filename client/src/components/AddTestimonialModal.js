@@ -33,6 +33,8 @@ function AddTestimonialModal() {
 
   return (
     <>
+    <h1>Welcome to Ekitchen!</h1>
+    <p>This site is under construction, but in the meantime please feel free to leave a review of my food.</p>
       {/* Button trigger modal  */}
       <button
         type="button"
@@ -42,7 +44,7 @@ function AddTestimonialModal() {
       >
         <div className="d-flex align-items-center">
           <FaUser className="icon" />
-          <div>Add Testimony</div>
+          <div>Add Review</div>
         </div>
       </button>
 
@@ -58,7 +60,7 @@ function AddTestimonialModal() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="addTestimonyModalLabel">
-                Add Your Testimony
+                Add Your Review
               </h5>
               <button
                 type="button"

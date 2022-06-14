@@ -1,11 +1,13 @@
 {
   "name": "ekitchen",
+  "homepage": "https://ekitchen.net",
   "version": "1.0.0",
   "description": "This is the repo for Ekitchen.net",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "dev": "nodemon server/index.js",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/flyboy85749/ekitchen/issues"
   },
-  "homepage": "https://github.com/flyboy85749/ekitchen#readme",
   "dependencies": {
     "colors": "^1.4.0",
     "cors": "^2.8.5",
