@@ -78,6 +78,12 @@ const RootQuery = new GraphQLObjectType({
         return Recipe.findById(args.id);
       },
     },
+    testimonials: {
+      type: new GraphQLList(TestimonialType),
+      resolve(parent, args) {
+        return Testimonial.find();
+      },
+    },
     testimonial: {
         type: TestimonialType,
         args: { id: { type: GraphQLID } },
@@ -92,6 +98,7 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    // Add a testimonial
     addTestimonial: {
         type: TestimonialType,
         args: {
@@ -106,7 +113,17 @@ const mutation = new GraphQLObjectType({
             return testimonial.save()
         }
     },
-
+    // Delete a testimonial
+    deleteTestimonial: {
+      type: TestimonialType,
+      args: {
+          id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args){
+          return Testimonial.findByIdAndRemove(args.id)
+      }
+  },
+// Add a recipe
     addRecipe: {
       type: RecipeType,
       args: {
@@ -130,6 +147,26 @@ const mutation = new GraphQLObjectType({
         resolve(parent, args){
             return Recipe.findByIdAndRemove(args.id)
         }
+    },
+    // Update a recipe
+    updateRecipe: {
+      type: RecipeType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args){
+        return Recipe.findByIdAndUpdate(args.id,
+          {
+            $set: {
+              name: args.name,
+              description: args.description
+            }
+          },
+          {new: true}
+        )
+      }
     }
   },
 });
