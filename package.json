@@ -1,12 +1,15 @@
 {
   "name": "ekitchen",
-  "homepage": "https://ekitchen.net",
+  "homepage": "http://flyboy85749.github.io/ekitchen",
   "version": "1.0.0",
   "description": "This is the repo for Ekitchen.net",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js",
+    "client": "cd client && npm start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "backend": "cd server && nodemon server.js",
+    "dev": "concurrently \"nodemon server/index.js\" \"npm run client\"",
     "build": "react-scripts build"
   },
   "repository": {
@@ -25,10 +28,12 @@
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
-    "mongoose": "^6.3.6"
+    "mongoose": "^6.3.6",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
+    "gh-pages": "^4.0.0",
     "nodemon": "^2.0.16"
   }
 }
