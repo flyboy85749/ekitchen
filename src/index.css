@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -40,4 +44,11 @@ ul a {
   display: inline-block;
   text-align: center;
   color: #6d6674;
+}
+
+.signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
