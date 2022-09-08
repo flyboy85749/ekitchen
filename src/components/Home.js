@@ -2,7 +2,7 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>Welcome to Ekitchen!</div>
+    <div>This will be the page that is shown first.</div>
   )
 }
 
