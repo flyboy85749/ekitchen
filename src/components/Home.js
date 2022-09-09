@@ -25,7 +25,7 @@ function Home() {
     <>
     <div className="font-normal mx-80 mb-7">Welcome to the Ekitchen website. This site is a work in progress, 
     so please be patient. Once completed, you will be able to many very cool things here; from placing orders for food, reading about the latest cooking tips and tricks, to maybe even sharing with friends.</div>
-    <h3>Testimonials</h3>
+    <h3 className="m-3 font-semibold text-lg">Testimonials</h3>
     <ul className="divide-y divide-gray-200">
     {people.map((person) => (
       <li key={person.comment} className="py-4 flex">
